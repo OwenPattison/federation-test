@@ -1,23 +1,31 @@
 <template>
   <div class="hello">
-    <h1>{{ msg }}</h1>
+    <h1>{{ message }}</h1>
 
     Add in remote app
-    ##<ViteVue3 />##
+    <!-- ##Here should be vue vite: <vite-vue-3 />## -->
+    <ViteVue3 />
   </div>
 </template>
 
 <script lang="ts">
+import { AsyncComponent } from '../SomeAsyncComponent';
 import { Component, Prop, Vue } from 'vue-property-decorator';
-import { ViteVue3 } from "../components/ViteVue3"
+import { ViteVue3 } from "./ViteVue3";
 
 @Component({
     components: {
-      ViteVue3
+      // "vite-vue-3": AsyncComponent
+      ViteVue3: ViteVue3
     }
 })
 export default class HelloWorld extends Vue {
-  @Prop() private msg!: string;
+  // @Prop({ type: String, default: "Wow" }) 
+  // public msg!: string;
+
+  public get message() {
+    return "WOW";
+  }
 }
 </script>
 

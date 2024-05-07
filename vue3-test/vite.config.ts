@@ -24,11 +24,11 @@ export default defineConfig({
       },
       // Modules to expose
       exposes: {
-        // "./NotAButton": "./src/mount",
-        "./NotAButton": {
-          name: "'button",
-          import: "./src/components/NotAButton.vue"
-        },
+        "./NotAButton": "./src/mount",
+        // "./NotAButton": {
+        //   name: "button",
+        //   import: "./src/components/NotAButton.vue"
+        // },
       },
       shared: ['vue']
     }),
