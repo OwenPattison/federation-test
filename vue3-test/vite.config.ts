@@ -7,17 +7,30 @@ import federation from "@originjs/vite-plugin-federation";
 
 // https://vitejs.dev/config/
 export default defineConfig({
+  cacheDir: 'node_modules/.cacheDir',
   plugins: [
     vue(),
     vueJsx(),
     federation({
       name: "remoteVue3App",
       filename: "remoteEntry.js",
+      remotes: {
+        "host-app": {
+          external: '/',
+          externalType: "url",
+          format: 'esm',
+          from:'webpack'
+        }
+      },
       // Modules to expose
       exposes: {
-        "./NotAButton": "./src/mount",
-        // "./NotAButton": "./src/components/NotAButton.vue",
-      }
+        // "./NotAButton": "./src/mount",
+        "./NotAButton": {
+          name: "'button",
+          import: "./src/components/NotAButton.vue"
+        },
+      },
+      shared: ['vue']
     }),
   ],
   resolve: {
@@ -26,6 +39,16 @@ export default defineConfig({
     }
   },
   build: {
-    target: "esnext"
+    target: 'esnext',
+    minify: false,
+    cssCodeSplit: true,
+    rollupOptions: {
+      output: {
+        format: 'esm',
+        entryFileNames: 'assets/[name].js',
+        minifyInternalExports: false
+      }
+    },
+    outDir: "../host-app/dist/remoteVue3App"
   }
 })
