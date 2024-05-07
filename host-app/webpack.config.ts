@@ -1,10 +1,12 @@
-const path = require("path");
-const { VueLoaderPlugin } = require("vue-loader");
-const MiniCssExtractPlugin = require("mini-css-extract-plugin");
-const HtmlWebpackPlugin = require("html-webpack-plugin");
-const { ModuleFederationPlugin } = require("webpack").container;
+declare const __dirname: string;
+import * as path from "path";
 
-module.exports = (env = {}) => ({
+import { VueLoaderPlugin } from "vue-loader";
+import MiniCssExtractPlugin from "mini-css-extract-plugin";
+import HtmlWebpackPlugin from "html-webpack-plugin";
+import * as webpack from "webpack";
+
+export default (env = {}) => ({
     mode: "development",
     cache: false,
     target: 'es2020',
@@ -83,7 +85,7 @@ module.exports = (env = {}) => ({
         new MiniCssExtractPlugin({
             filename: "[name].css",
         }),
-        new ModuleFederationPlugin({
+        new webpack.container.ModuleFederationPlugin({
             name: "home",
             filename: "remoteEntry.js",
             library: { type: 'module' },

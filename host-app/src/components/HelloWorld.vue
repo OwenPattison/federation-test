@@ -9,13 +9,11 @@
 </template>
 
 <script lang="ts">
-import { AsyncComponent } from '../SomeAsyncComponent';
 import { Component, Prop, Vue } from 'vue-property-decorator';
 import { ViteVue3 } from "./ViteVue3";
 
 @Component({
     components: {
-      // "vite-vue-3": AsyncComponent
       ViteVue3: ViteVue3
     }
 })
